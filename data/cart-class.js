@@ -3,19 +3,20 @@ import { getDeliveryOption } from "./deliveryoptions.js";
 //class is just a better way to generate objects in object oriented programming
 class Cart {
   cartItems;
-  localStorageKey;
+  #localStorageKey;
+  //adding # sign makes a property a private property and now it cannot be accessed outside the class
 
   // constructor is a block of code which we run to provide setup values to the class
 
   constructor (localStorageKey) {
-    this.localStorageKey = localStorageKey;
+    this.#localStorageKey = localStorageKey;
 
-    this.loadFromStorage();
+    this.#loadFromStorage();
   }
 
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
   
     if (!this.cartItems) {
       this.cartItems = [{
@@ -31,7 +32,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart (productId , selectedValue) {
@@ -109,6 +110,7 @@ class Cart {
 
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
+
 
 console.log(cart)
 console.log(businessCart)
