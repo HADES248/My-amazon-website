@@ -27,6 +27,10 @@ class Product {
     this.priceCents = productDetails.priceCents;
   }
 
+  extraInfoHTML() {
+    return '';
+  }
+
   getStarsUrl() {
     return `images/ratings/rating-${this.rating.stars * 10}.png`
   }
@@ -34,7 +38,22 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`
   }
+}
 
+// we use inheritence when we need more specified class of one class
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  //this process of redefining extraInfo HTML in child class is known as method overriding
+  extraInfoHTML() {
+    //super.extraInfoHTML() this calls the parent's method 
+    return `<a href="${this.sizeChartLink} target="_blank">Size Chart</a>`
+  }
 }
 
 export const products = [
@@ -730,6 +749,9 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing (productDetails);
+  }
   return new Product(productDetails);
 });
 
