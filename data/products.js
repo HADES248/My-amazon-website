@@ -12,7 +12,7 @@ export function getProduct(productId) {
   return matchingProduct;
 };
 
-class Product {
+export class Product {
   id;
   image;
   name;
@@ -41,7 +41,7 @@ class Product {
 }
 
 // we use inheritence when we need more specified class of one class
-class Clothing extends Product {
+export class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
@@ -86,7 +86,7 @@ class Clothing extends Product {
 // }
 // object3.method();
 
-class Appliance extends Product {
+export class Appliance extends Product {
   instructionsLink;
   warrantyLink;
 
@@ -822,5 +822,4 @@ export const products = [
   }
   return new Product(productDetails);
 });
-
 // .map() function loops an array, runs a function for each index and return the new modified array
