@@ -3,7 +3,7 @@ import {products, loadProducts} from '../data/products.js';
 import {formatCurrency} from "./utils/money.js";
 
 
-loadProducts(renderProductsGrid);
+loadProducts(renderProductsGrid); //callback is used here
 
 function renderProductsGrid() {
   let productsHTML = '';
