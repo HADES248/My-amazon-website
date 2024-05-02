@@ -7,20 +7,37 @@ import { loadCart } from "../data/cart.js";
 // import '../data/cart-class.js'
 //import '../data/backend-practice.js';
 
+//async makes a function return a promise
+async function loadPage() {
+  await loadProductsFetch();
 
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
-    loadCart(() => {
-      resolve('value2');
-    });
-  })
-]).then((values) => {
-  console.log(values);
+  const value = await new Promise((resolve) => {
+        loadCart(() => {
+          resolve('value3');
+        });
+      });
+
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
-});
+
+}
+loadPage();
+
+
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve('value2');
+//     });
+//   })
+// ]).then((values) => {
+//   console.log(values);
+//   renderCheckoutHeader();
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 
 
 // let us wait for some code to finish before going to the next step
