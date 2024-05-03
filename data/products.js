@@ -135,6 +135,7 @@ export function loadProductsFetch() {
 //   console.log('next step');
 // });
 
+
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -158,6 +159,8 @@ export function loadProducts(fun) {
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
+
+
 /*
 export const products = [
   {
