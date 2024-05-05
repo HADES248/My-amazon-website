@@ -20,7 +20,7 @@ async function loadPage() {
         <div class="order-header-left-section">
           <div class="order-date">
             <div class="order-header-label">Order Placed:</div>
-            <div>${dayjs().format('MMMM D')}</div>
+            <div>${dayjs(order.orderTime).format('MMMM D')}</div>
           </div>
           <div class="order-total">
             <div class="order-header-label">Total:</div>

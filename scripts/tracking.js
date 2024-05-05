@@ -26,6 +26,28 @@ export async function loadtrackingPage (order) {
   let trackingHTML = '';
 
   order.products.forEach((productDetails) => {
+    const currentDate = dayjs();
+    
+    const orderedDate = dayjs(order.orderTime);
+    
+    const deliveryDate = dayjs(productDetails.estimatedDeliveryTime);
+    
+
+    let percentBar = ((currentDate - orderedDate) / (deliveryDate - orderedDate)) * 100;
+
+    if (percentBar >= 0 && percentBar < 50 ) {
+      document.querySelector('.js-progress-label-prepairing').classList.add('current-status');
+    } else if (percentBar >= 50 && percentBar < 99 ) {
+      document.querySelector('.js-progress-label-prepairing').classList.remove('current-status');
+      document.querySelector('.js-progress-label-shipping').classList.add('current-status')
+    } else if (percentBar >= 99) {
+      document.querySelector('.js-progress-label-shipping').classList.remove('current-status');
+      document.querySelector('.js-progress-label-delivered').classList.add('current-status')
+    }
+    
+    document.querySelector('.progress-bar').style.width = `${percentBar}%`;
+
+
     if (productId === productDetails.productId) {
       const orderedProduct = getProduct(productDetails.productId);
       trackingHTML = `
