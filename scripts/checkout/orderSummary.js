@@ -98,7 +98,6 @@ export function renderOrderSummary() {
       `;
     });
 
-    renderCheckoutHeader();
     updateCartQuantity();
 
     return html;
@@ -134,6 +133,7 @@ export function renderOrderSummary() {
           quantityLabel.innerHTML = value;
       
           updateCartQuantity();
+          renderPaymentSummary();
         }
       });
     });
@@ -168,9 +168,7 @@ export function renderOrderSummary() {
 
       quantityLabel.innerHTML = inputQuantity;
       
-      renderCheckoutHeader();
       updateCartQuantity();
-      renderPaymentSummary();
     });
   });
 
@@ -178,8 +176,6 @@ export function renderOrderSummary() {
     link.addEventListener('click', () => {
       const {productId} = link.dataset;
       removeFromCart(productId);
-
-      renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
     });

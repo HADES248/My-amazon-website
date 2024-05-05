@@ -9,5 +9,5 @@ export function renderCheckoutHeader() {
 } 
 
 export function updateCartQuantity() {
-  document.querySelector('.js-return-to-home').innerHTML += `${calculateCartQuantity()} items`;
+  document.querySelector('.js-return-to-home').innerHTML = `${calculateCartQuantity()} items`;
 }

@@ -3,6 +3,7 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import formatCurrency from "../scripts/utils/money.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import { addToCart, calculateCartQuantity } from '../data/cart.js';
+import { loadtrackingPage } from "./tracking.js";
 
 async function loadPage() {
 
@@ -68,8 +69,8 @@ async function loadPage() {
       </div>
 
       <div class="product-actions">
-        <a href="tracking.html?orderId=123&productId=456">
-          <button class="track-package-button button-secondary">
+        <a href="tracking.html?orderId=${order.id}&productId=${orderedProduct.id}">
+          <button class="track-package-button js-track-package-button button-secondary" data-order-id="${order.id}">
             Track package
           </button>
         </a>
@@ -99,7 +100,19 @@ async function loadPage() {
         `
       }, 1500);
     });
-  })
+  });
+
+  document.querySelectorAll('.js-track-package-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const { orderId } = button.dataset;
+
+      orders.forEach((order) => {
+        if (orderId === order.id) {
+          loadtrackingPage(order);
+        }
+      });
+    });
+  });
 }
 
 loadPage();
