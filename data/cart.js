@@ -19,7 +19,7 @@ export function loadFromStorage() {
   }
 }
 
-function saveToStorage() {
+export function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -75,6 +75,12 @@ export function removeFromCart(productId) {
       newCart.push(cartItem);
     }
   });
+  cart = newCart;
+  saveToStorage();
+}
+
+export function resetCart() {
+  const newCart = [];
   cart = newCart;
   saveToStorage();
 }
