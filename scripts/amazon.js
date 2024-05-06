@@ -21,7 +21,7 @@ function renderProductsGrid() {
     });
 
   document.querySelector('.js-search-button').addEventListener('click', () => {
-    window.location.href = `amazon.html?search=${searchInput.value}`
+    window.location.href = `amazon.html?search=${searchInput.value}`;
   });
 
     const url = new URL (window.location.href);
@@ -32,7 +32,7 @@ function renderProductsGrid() {
 
     if (searchedProduct) {
       filteredProducts = products.filter((product) => {
-        return product.name.includes(searchedProduct);
+        return product.keywords.includes(searchedProduct);
       })
     }
 
