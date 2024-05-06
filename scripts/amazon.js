@@ -37,8 +37,6 @@ function renderProductsGrid() {
     }
 
   filteredProducts.forEach((product) => {
-
-
     productsHTML += `
           <div class="product-container">
             <div class="product-image-container">
