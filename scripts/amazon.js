@@ -5,12 +5,40 @@ import {formatCurrency} from "./utils/money.js";
 
 loadProducts(renderProductsGrid); //callback is used here
 
+
 function renderProductsGrid() {
+
+
   let productsHTML = '';
 
   updateCartQuantity();
 
-  products.forEach((product) => {
+  const searchInput = document.querySelector('.js-search-bar');
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        window.location.href = `amazon.html?search=${searchInput.value}`
+      }
+    });
+
+  document.querySelector('.js-search-button').addEventListener('click', () => {
+    window.location.href = `amazon.html?search=${searchInput.value}`
+  });
+
+    const url = new URL (window.location.href);
+
+    const searchedProduct = url.searchParams.get('search');
+
+    let filteredProducts = products;
+
+    if (searchedProduct) {
+      filteredProducts = products.filter((product) => {
+        return product.name.includes(searchedProduct);
+      })
+    }
+
+  filteredProducts.forEach((product) => {
+
+
     productsHTML += `
           <div class="product-container">
             <div class="product-image-container">
@@ -71,10 +99,8 @@ function renderProductsGrid() {
 
 
   function updateCartQuantity() {
-    let cartNumber = document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
+    document.querySelector('.js-cart-quantity').innerHTML = calculateCartQuantity();
   }
-
-
 
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     let message;
