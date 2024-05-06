@@ -34,14 +34,17 @@ export async function loadtrackingPage (order) {
     
 
     let percentBar = ((currentDate - orderedDate) / (deliveryDate - orderedDate)) * 100;
+    let deliverMessage;
+
+    if (percentBar >= 99 ) deliverMessage = 'Delivered on'
+    else deliverMessage = 'Arriving on';
+
 
     if (percentBar >= 0 && percentBar < 50 ) {
       document.querySelector('.js-progress-label-prepairing').classList.add('current-status');
     } else if (percentBar >= 50 && percentBar < 99 ) {
-      document.querySelector('.js-progress-label-prepairing').classList.remove('current-status');
       document.querySelector('.js-progress-label-shipping').classList.add('current-status')
     } else if (percentBar >= 99) {
-      document.querySelector('.js-progress-label-shipping').classList.remove('current-status');
       document.querySelector('.js-progress-label-delivered').classList.add('current-status')
     }
     
@@ -52,7 +55,7 @@ export async function loadtrackingPage (order) {
       const orderedProduct = getProduct(productDetails.productId);
       trackingHTML = `
       <div class="delivery-date">
-        Arriving on ${dayjs(productDetails.estimatedDeliveryTime).format('MMMM D')}
+        ${deliverMessage} on ${dayjs(productDetails.estimatedDeliveryTime).format('MMMM D')}
       </div>
 
       <div class="product-info">
