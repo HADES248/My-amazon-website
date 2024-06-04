@@ -14,8 +14,8 @@ async function loadPage() {
     //throw 'error1'; manually created error;
 
     await Promise.all([
-      await loadProductsFetch(),
-      await loadCartFetch(),
+      loadProductsFetch(),
+      loadCartFetch(),
     ])
 
   } catch (error) {

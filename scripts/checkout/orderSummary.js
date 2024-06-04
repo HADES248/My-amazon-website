@@ -169,6 +169,7 @@ export function renderOrderSummary() {
       quantityLabel.innerHTML = inputQuantity;
       
       updateCartQuantity();
+      renderPaymentSummary();
     });
   });
 
