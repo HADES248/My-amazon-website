@@ -13,7 +13,7 @@ async function loadPage() {
   await loadProductsFetch();
   let ordersHTML = '';
 
-  orders.forEach((order) => {
+  await orders.forEach((order) => {
     ordersHTML += `
     <div class="order-container">
       <div class="order-header">
