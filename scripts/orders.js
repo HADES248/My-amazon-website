@@ -43,6 +43,8 @@ async function loadPage() {
   function loadProduct(order) {
     let productHTML = '';
 
+
+    // Checking if order.products is an array or not.
     if (!order.products || !Array.isArray(order.products)) {
       console.error("order.products is undefined or not an array");
       return '';
