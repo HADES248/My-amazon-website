@@ -13,7 +13,7 @@ async function loadPage() {
   await loadProductsFetch();
   let ordersHTML = '';
 
-  await orders.forEach((order) => {
+  orders.forEach((order) => {
     ordersHTML += `
     <div class="order-container">
       <div class="order-header">
@@ -43,14 +43,19 @@ async function loadPage() {
   function loadProduct(order) {
     let productHTML = '';
 
+    if (!order.products || !Array.isArray(order.products)) {
+      console.error("order.products is undefined or not an array");
+      return '';
+    }
+
     order.products.forEach((productDetails) => {
 
-       const currentDate = dayjs();
-       const deliveryDate = dayjs(productDetails.estimatedDeliveryTime);
+      const currentDate = dayjs();
+      const deliveryDate = dayjs(productDetails.estimatedDeliveryTime);
 
-       let deliverMessage;
-       if (currentDate > deliveryDate) deliverMessage = 'Delivered on:'
-        else deliverMessage = 'Arriving on:'
+      let deliverMessage;
+      if (currentDate > deliveryDate) deliverMessage = 'Delivered on:'
+      else deliverMessage = 'Arriving on:'
 
 
       const orderedProduct = getProduct(productDetails.productId);
@@ -64,7 +69,7 @@ async function loadPage() {
           ${orderedProduct.name}
         </div>
         <div class="product-delivery-date">
-        ${ deliverMessage } ${dayjs(productDetails.estimatedDeliveryTime).format('MMMM D')}
+        ${deliverMessage} ${dayjs(productDetails.estimatedDeliveryTime).format('MMMM D')}
         </div>
         
         <div class="product-quantity">
@@ -96,7 +101,7 @@ async function loadPage() {
     button.addEventListener('click', () => {
       const { productId } = button.dataset;
 
-      addToCart( productId , 1 );
+      addToCart(productId, 1);
 
       cartQuantity.innerHTML = calculateCartQuantity();
 
